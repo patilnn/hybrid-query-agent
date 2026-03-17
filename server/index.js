@@ -6,7 +6,16 @@ import agentRoutes from "./routes/agent.js";
 dotenv.config();
 
 const app = express();
-app.use(cors());
+const allowedOrigins = (process.env.CORS_ORIGINS ?? "")
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
+const corsOptions = allowedOrigins.length
+  ? { origin: allowedOrigins }
+  : { origin: "*" };
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.get("/health", (req, res) => {
