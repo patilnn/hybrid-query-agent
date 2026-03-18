@@ -18,7 +18,7 @@ export async function generateQueries(req, res) {
   try {
     const result = await buildQueries({ role, skills, location, preferences });
     return res.json(result);
-  } catch (error) {
+  } catch {
     return res.status(500).json({ error: "Error generating queries" });
   }
 }

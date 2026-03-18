@@ -18,6 +18,17 @@ const corsOptions = allowedOrigins.length
 app.use(cors(corsOptions));
 app.use(express.json());
 
+app.get("/", (req, res) => {
+  res.json({
+    ok: true,
+    service: "job-ai-agent-api",
+    endpoints: {
+      health: "/health",
+      generateQueries: "/api/queries",
+    },
+  });
+});
+
 app.get("/health", (req, res) => {
   res.json({ ok: true });
 });
